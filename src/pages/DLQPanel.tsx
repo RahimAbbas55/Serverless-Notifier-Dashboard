@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchDLQMessages, replayDLQMessage, DLQMessage } from "../api/client";
+import { fetchDLQMessages, replayDLQMessage } from "../api/client";
+import type { DLQMessage } from "../api/client";
 
 export default function DLQPanel() {
   const [messages, setMessages] = useState<DLQMessage[]>([]);

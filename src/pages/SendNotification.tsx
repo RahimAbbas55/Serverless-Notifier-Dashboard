@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { sendNotification, NotificationPayload } from "../api/client";
+import { sendNotification } from "../api/client";
+import type { NotificationPayload } from "../api/client";
 
 const LEVELS = ["info", "warning", "error", "critical"] as const;
 const CHANNELS = ["slack", "email", "both"] as const;

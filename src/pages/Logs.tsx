@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchLogs, LogEntry } from "../api/client";
+import { fetchLogs } from "../api/client";
+import type { LogEntry } from "../api/client";
 
 const LEVEL_COLORS: Record<string, string> = {
   INFO: "#4ade80",

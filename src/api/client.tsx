@@ -28,7 +28,7 @@ export interface DLQMessage {
 export const sendNotification = async (payload: NotificationPayload) => {
   const response = await fetch(BASE_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    // headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   return response.json();
@@ -55,7 +55,7 @@ export const replayDLQMessage = async (
 ) => {
   const response = await fetch(`${BASE_URL}/dlq/replay`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    // headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ receiptHandle, payload }),
   });
   return response.json();

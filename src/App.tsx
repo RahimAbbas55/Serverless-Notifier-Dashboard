@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Toaster } from "sonner";
 import Navbar from "./components/Navbar";
 import SendNotification from "./pages/SendNotification";
 import Logs from "./pages/Logs";
@@ -15,9 +16,12 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0f0f0f" }}>
-      <Navbar activePage={activePage} setActivePage={setActivePage} />
-      {renderPage()}
-    </div>
+    <>
+      <Toaster theme="dark" position="bottom-right" richColors />
+      <div style={{ minHeight: "100vh" }}>
+        <Navbar activePage={activePage} setActivePage={setActivePage} />
+        {renderPage()}
+      </div>
+    </>
   );
 }

@@ -1,133 +1,77 @@
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import { fetchLogs } from "../api/client";
 import type { LogEntry } from "../api/client";
+import styles from "./Logs.module.css";
 
-const LEVEL_COLORS: Record<string, string> = {
-  INFO: "#4ade80",
-  WARNING: "#facc15",
-  ERROR: "#f87171",
-  CRITICAL: "#c084fc",
-};
+type LogLevel = "info" | "warning" | "error" | "critical";
 
-function getLevelFromMessage(message: string): string {
-  if (message.includes("[INFO]")) return "INFO";
-  if (message.includes("[WARNING]")) return "WARNING";
-  if (message.includes("[ERROR]")) return "ERROR";
-  if (message.includes("[CRITICAL]")) return "CRITICAL";
-  return "INFO";
+function parseLevel(message: string): LogLevel {
+  if (message.includes("[CRITICAL]")) return "critical";
+  if (message.includes("[ERROR]"))    return "error";
+  if (message.includes("[WARNING]"))  return "warning";
+  return "info";
 }
 
 export default function Logs() {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const loadLogs = async () => {
     setLoading(true);
-    setError(null);
     try {
       const data = await fetchLogs();
       setLogs(data);
-    } catch (err) {
-      setError("Failed to fetch logs");
+    } catch {
+      toast.error("Failed to fetch logs");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadLogs();
+    (async () => { await loadLogs(); })();
   }, []);
 
   return (
-    <div style={{ maxWidth: "800px", margin: "40px auto", padding: "0 24px" }}>
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "24px"
-      }}>
-        <h1 style={{ fontSize: "18px", fontWeight: 600 }}>Logs</h1>
-        <button
-          onClick={loadLogs}
-          disabled={loading}
-          style={{
-            background: "#1a1a1a",
-            color: "#888",
-            border: "1px solid #2a2a2a",
-            borderRadius: "6px",
-            padding: "6px 14px",
-            fontSize: "12px",
-            cursor: "pointer",
-          }}
-        >
+    <div className={styles.page}>
+      <div className={styles.toolbar}>
+        <div>
+          <h1 className={styles.title}>Logs</h1>
+          {!loading && (
+            <p className={styles.meta}>{logs.length} entr{logs.length === 1 ? "y" : "ies"}</p>
+          )}
+        </div>
+        <button className={styles.refreshBtn} onClick={loadLogs} disabled={loading}>
           {loading ? "Loading..." : "Refresh"}
         </button>
       </div>
 
-      {error && (
-        <div style={{
-          padding: "12px",
-          background: "#2a0f0f",
-          border: "1px solid #4a1a1a",
-          borderRadius: "6px",
-          color: "#f87171",
-          fontSize: "13px",
-          marginBottom: "16px"
-        }}>
-          {error}
+      {loading && <p className={styles.loading}>Fetching logs...</p>}
+
+      {!loading && logs.length === 0 && (
+        <div className={styles.empty}>
+          <span className={styles.emptyIcon}>○</span>
+          No logs found
         </div>
       )}
 
-      {loading && (
-        <div style={{ color: "#888", fontSize: "13px" }}>Fetching logs...</div>
+      {!loading && logs.length > 0 && (
+        <div className={styles.logList}>
+          {logs.map((log, i) => {
+            const level = parseLevel(log.message);
+            return (
+              <div key={i} className={`${styles.logEntry} ${styles[level]}`}>
+                <div className={styles.logMeta}>
+                  <span className={`${styles.logLevel} ${styles[level]}`}>{level}</span>
+                  <span className={styles.logTime}>{log.timestamp}</span>
+                </div>
+                <p className={styles.logMessage}>{log.message}</p>
+              </div>
+            );
+          })}
+        </div>
       )}
-
-      {!loading && logs.length === 0 && (
-        <div style={{ color: "#888", fontSize: "13px" }}>No logs found.</div>
-      )}
-
-      {!loading && logs.map((log, index) => {
-        const level = getLevelFromMessage(log.message);
-        const color = LEVEL_COLORS[level] || "#888";
-        return (
-          <div
-            key={index}
-            style={{
-              padding: "12px 16px",
-              background: "#1a1a1a",
-              border: "1px solid #2a2a2a",
-              borderRadius: "6px",
-              marginBottom: "8px",
-            }}
-          >
-            <div style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginBottom: "6px"
-            }}>
-              <span style={{
-                fontSize: "11px",
-                color: color,
-                fontWeight: 600,
-              }}>
-                {level}
-              </span>
-              <span style={{ fontSize: "11px", color: "#555" }}>
-                {log.timestamp}
-              </span>
-            </div>
-            <div style={{
-              fontSize: "12px",
-              color: "#ccc",
-              wordBreak: "break-word",
-              lineHeight: "1.5"
-            }}>
-              {log.message}
-            </div>
-          </div>
-        );
-      })}
     </div>
   );
 }

@@ -1,0 +1,151 @@
+.page {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 4px;
+}
+
+/* Card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cardBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cardFooter {
+  border-top: 1px solid var(--border);
+  padding: 13px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Fields */
+.label {
+  display: block;
+  font-size: 10px;
+  color: var(--text-2);
+  margin-bottom: 7px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  background: #181818;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 11px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--border-focus);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-3);
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.55;
+}
+
+/* Segmented control */
+.segGroup {
+  display: flex;
+  background: #0c0c0c;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.segBtn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 6px 8px;
+  color: var(--text-2);
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.1s, color 0.1s;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.segBtn:hover:not(.segActive) {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.segBtn.segActive {
+  background: #dfdfdf;
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Level colors on white active pill — use darker shades for contrast */
+.segBtnLevel.info.segActive    { color: #1d5fb5; }
+.segBtnLevel.warning.segActive { color: #a85c00; }
+.segBtnLevel.error.segActive   { color: #b91c1c; }
+.segBtnLevel.critical.segActive{ color: #7a1dc2; }
+
+/* Submit */
+.submitBtn {
+  background: var(--text);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  letter-spacing: -0.1px;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.82;
+}
+
+.submitBtn:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+

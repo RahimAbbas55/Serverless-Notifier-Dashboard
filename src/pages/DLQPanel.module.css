@@ -1,0 +1,175 @@
+.page {
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 3px;
+}
+
+.refreshBtn {
+  background: var(--surface);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 13px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+.refreshBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.loading {
+  color: var(--text-2);
+  font-size: 13px;
+}
+
+.empty {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface);
+}
+
+.emptyMark {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: var(--green);
+  opacity: 0.6;
+}
+
+/* Message cards */
+.messageList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badgeFailed {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--red);
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  border-radius: 4px;
+  padding: 2px 7px;
+  text-transform: uppercase;
+}
+
+.retryCount {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.msgId {
+  font-size: 11px;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+}
+
+/* Payload */
+.payloadBlock {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: #0c0c0c;
+}
+
+.payloadLabel {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.payloadPre {
+  font-size: 12px;
+  color: #a8a8a8;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  font-family: var(--font-mono);
+  line-height: 1.55;
+}
+
+/* Footer / replay */
+.cardFooter {
+  padding: 11px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.replayBtn {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--green-border);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.replayBtn:hover:not(:disabled) {
+  background: var(--green-bg);
+}
+
+.replayBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

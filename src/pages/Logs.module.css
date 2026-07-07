@@ -1,0 +1,119 @@
+.page {
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.meta {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 3px;
+}
+
+.refreshBtn {
+  background: var(--surface);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 13px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+.refreshBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.loading {
+  color: var(--text-2);
+  font-size: 13px;
+}
+
+.empty {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 13px;
+}
+
+.emptyIcon {
+  display: block;
+  margin-bottom: 8px;
+  opacity: 0.3;
+  font-size: 22px;
+}
+
+/* Log list */
+.logList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logEntry {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  border-radius: 6px;
+  padding: 10px 14px;
+  transition: border-color 0.12s;
+}
+
+.logEntry.info     { border-left-color: var(--blue); }
+.logEntry.warning  { border-left-color: var(--yellow); }
+.logEntry.error    { border-left-color: var(--red); }
+.logEntry.critical { border-left-color: var(--purple); }
+
+.logMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.logLevel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.logLevel.info     { color: var(--blue); }
+.logLevel.warning  { color: var(--yellow); }
+.logLevel.error    { color: var(--red); }
+.logLevel.critical { color: var(--purple); }
+
+.logTime {
+  font-size: 11px;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+}
+
+.logMessage {
+  font-size: 12px;
+  color: #b0b0b0;
+  line-height: 1.55;
+  word-break: break-word;
+  font-family: var(--font-mono);
+}
